@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const postsRoutes = require('./routes/posts'); // import routes
+const userRoutes = require('./routes/user');
 
 const app = express();
 
@@ -14,6 +15,7 @@ mongoose.connect("mongodb+srv://Mark:rViPgJj3f43IxVkG@cluster0-vm5vy.mongodb.net
   .catch(() => {
     console.log('Connection failed!');
   });
+mongoose.set('useCreateIndex', true);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -34,5 +36,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/posts', postsRoutes); // make the app aware of the routes
+app.use('/api/user', userRoutes);
 
 module.exports = app;
