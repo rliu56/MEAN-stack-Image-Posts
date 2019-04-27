@@ -55,7 +55,7 @@ router.post('/login', (req, res, next) => {
       token: token,
     });
   })
-  .catch(err => {
+  .catch(error => {
     return res.status(401).json({
       message: 'Auth failed'
     });
