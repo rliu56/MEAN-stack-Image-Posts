@@ -33,11 +33,12 @@ const storage = multer.diskStorage({
 
 // use multer
 router.post("", checkAuth, multer({storage}).single('image'), (req, res, next) => {
-  const url = req.protocol + '://' + req.get("host") + "/images/" + req.file.filename;
+  const url = req.protocol + '://' + req.get("host");
   const post = new Post({
     title: req.body.title,
     content: req.body.content,
-    imagePath: url
+    imagePath: url + "/images/" + req.file.filename,
+    creator: req.userData.userId
   });
   post.save().then(createdPost => {
     res.status(201).json({
@@ -60,11 +61,16 @@ router.put("/:id", checkAuth, multer({storage}).single('image'), (req, res, next
     _id: req.body.id,
     title: req.body.title,
     content: req.body.content,
-    imagePath: imagePath
+    imagePath: imagePath,
+    creator: req.userData.userId
   });
   console.log(post);
-  Post.updateOne({_id: req.params.id}, post).then(result => {
-    res.status(200).json({ message: "Update successful!"});
+  Post.updateOne({_id: req.params.id, creator: req.userData.userId }, post).then(result => {
+    if (result.nModified > 0) {
+      res.status(200).json({ message: "Update successful!"});
+    } else {
+      res.status(401).json({ message: "Not authorized"});
+    }
   });
 });
 
@@ -102,9 +108,13 @@ router.delete("/:id", checkAuth, (req, res, next) => {
   // [optional] image file deletetion
   Post.findById(req.params.id).then(post => {
     const path = './backend' + post.imagePath.substring(post.imagePath.indexOf("/images/"));
-    Post.deleteOne({_id: req.params.id}).then(result => {
-      fs.unlink(path, err => {if(err) console.log(err);});
-      res.status(200).json({message: "Post deleted!"});
+    Post.deleteOne({_id: req.params.id, creator: req.userData.userId}).then(result => {
+      if (result.n > 0) {
+        fs.unlink(path, err => { if(err) console.log(err);} );
+        res.status(200).json({message: "Post deleted!"});
+      } else {
+        res.status(401).json({ message: "Not authorized"});
+      }
     });
   });
   /* Post.deleteOne({_id: req.params.id}).then(result => {
