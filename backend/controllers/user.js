@@ -45,7 +45,7 @@ exports.userLogin = (req, res, next) => {
     }
     const token = jwt.sign(
       { email: fetchedUser.email, userId: fetchedUser._id },
-      'secret_this_should_be_longer',
+      process.env.JWT_KEY, // access the global variable we stored in "nodemon.json"
       { expiresIn: '1h' }
     );
     // res will be returned automatically because we have no more codes afterward
