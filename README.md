@@ -2,13 +2,13 @@
 
 # Image Posts
 
-It is a RESTful application for a user to manage his images or share them to the others. Deployed on AWS.
+It is a RESTful application for a user to manage his images or share them to the others. Deployed on AWS.  
 
-It consists of: 
-  • a RESTful stateless server, which can be connected to multiple different types of clients (browser, mobile app, etc.) without being modified, to satisfy different kinds of users’ needs.
-  • a Single Page Application with Angular as the front-end, which can be dynamically re-rendered without being reloaded, and provides a responsive and fast mobile-app-like user experience.
-  • Web Framework Components: Routing, ODM and Middleware.
-  • Authentication, authorization, file uploading and error handling.
+  It consists of:  
+  * a RESTful stateless server, which can be connected to multiple different types of clients (browser, mobile app, etc.) without being modified, to satisfy different kinds of users’ needs.  
+  * a Single Page Application with Angular as the front-end, which can be dynamically re-rendered without being reloaded, and provides a responsive and fast mobile-app-like user experience.  
+  * Web Framework Components: Routing, ODM and Middleware.  
+  * Authentication, authorization, file uploading and error handling.  
 
 ## Development server
 
