@@ -2,7 +2,7 @@
 
 # Image Posts
 
-It is a RESTful application for a user to manage his images or share them to the others. Deployed on AWS.  
+It is a RESTful single page application for users to manage their own images or share them to others. Deployed on AWS.  
 
   It consists of:  
   * a RESTful stateless server, which can be connected to multiple different types of clients (browser, mobile app, etc.) without being modified, to satisfy different kinds of users’ needs.  
