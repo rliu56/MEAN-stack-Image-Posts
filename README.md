@@ -1,5 +1,3 @@
-# See the demo at http://imageposts-env0.maptn63b2c.us-east-2.elasticbeanstalk.com/
-
 # Image Posts
 
 It is a RESTful single page application for users to manage their own images or share them to others. Deployed on AWS.  
